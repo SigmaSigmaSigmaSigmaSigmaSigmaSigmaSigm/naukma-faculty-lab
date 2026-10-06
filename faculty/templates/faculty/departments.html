@@ -1,0 +1,23 @@
+{% extends 'faculty/base.html' %}
+{% block title %}Кафедри{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <p class="eyebrow">Люди та наукові напрями</p>
+  <h1>Кафедри</h1>
+  <p>Знайомтеся з викладачами та спеціальностями факультету.</p>
+</div>
+<div class="card-grid">
+  {% for department in departments %}
+  <article class="card">
+    <h2><a href="{% url 'department_detail' department.pk %}">{{ department.name }}</a></h2>
+    <p class="meta">Завідувач кафедри<br><strong>{{ department.head }}</strong></p>
+    <h3>Випускові спеціальності</h3>
+    <ul class="link-list">
+      {% for program in department.programs.all %}
+      <li><a href="{% url 'program_detail' program.pk %}">{{ program.code }} · {{ program.name }}</a></li>
+      {% empty %}<li>Не є випусковою для спеціальностей у цьому каталозі.</li>{% endfor %}
+    </ul>
+  </article>
+  {% empty %}<p>Кафедри ще не додано.</p>{% endfor %}
+</div>
+{% endblock %}

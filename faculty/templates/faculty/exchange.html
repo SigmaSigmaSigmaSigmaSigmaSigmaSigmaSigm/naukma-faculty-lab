@@ -1,0 +1,38 @@
+{% extends 'faculty/base.html' %}
+{% block title %}Академічні обміни{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <p class="eyebrow">Міжнародні можливості</p>
+  <h1>Академічні обміни</h1>
+  <p>Оберіть країну та перевірте термін подачі заявки.</p>
+</div>
+<form class="filter" method="get">
+  <label for="country">Країна</label>
+  <select id="country" name="country">
+    <option value="">Усі країни</option>
+    {% for country in countries %}
+    <option value="{{ country }}" {% if selected_country == country %}selected{% endif %}>{{ country }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Показати</button>
+</form>
+<div class="card-grid">
+  {% for program in programs %}
+  <article class="card exchange-card">
+    <div class="card-top">
+      <span class="eyebrow">{{ program.country }}</span>
+      {% if program.is_open %}<span class="status open">Прийом триває</span>
+      {% else %}<span class="status closed">Прийом завершено</span>{% endif %}
+    </div>
+    <h2>{{ program.university }}</h2>
+    {{ program.description|linebreaks }}
+    <dl>
+      <div><dt>Мови навчання</dt><dd>{{ program.languages }}</dd></div>
+      <div><dt>Кількість місць</dt><dd>{{ program.places }}</dd></div>
+      <div><dt>Дедлайн</dt><dd><time datetime="{{ program.deadline|date:'Y-m-d' }}">{{ program.deadline|date:'d.m.Y' }}</time></dd></div>
+    </dl>
+  </article>
+  {% empty %}<p>Програм обміну за вибраною країною немає.</p>{% endfor %}
+</div>
+<p class="note">Навчальні пропозиції за умовою лабораторної роботи. Дедлайн включає зазначений день за київським часом.</p>
+{% endblock %}
