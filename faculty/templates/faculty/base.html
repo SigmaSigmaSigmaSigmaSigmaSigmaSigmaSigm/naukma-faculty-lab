@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Факультет природничих наук{% endblock %} · НаУКМА</title>
+  <link rel="stylesheet" href="{% static 'faculty/style.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти до вмісту</a>
+  <header class="site-header">
+    <a class="brand" href="{% url 'home' %}" aria-label="ФПрН НаУКМА — головна">
+      <span class="brand-mark">ФПрН</span>
+      <span>Києво-Могилянська<br>академія</span>
+    </a>
+    <nav aria-label="Основна навігація">
+      <a href="{% url 'home' %}" {% if request.path == '/' %}aria-current="page"{% endif %}>Головна</a>
+      <a href="{% url 'departments' %}" {% if '/departments/' in request.path %}aria-current="page"{% endif %}>Кафедри</a>
+      <a href="{% url 'programs' %}" {% if '/programs/' in request.path %}aria-current="page"{% endif %}>Спеціальності</a>
+      <a href="{% url 'exchange' %}" {% if request.path == '/exchange/' %}aria-current="page"{% endif %}>Обміни</a>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <span>ФПрН · Києво-Могилянська академія</span>
+    <span>Навчальний проєкт · Неофіційний сайт</span>
+  </footer>
+</body>
+</html>

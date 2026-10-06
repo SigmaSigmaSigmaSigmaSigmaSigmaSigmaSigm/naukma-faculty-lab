@@ -1,0 +1,19 @@
+{% extends 'faculty/base.html' %}
+{% block title %}{{ page.title|default:'Головна' }}{% endblock %}
+{% block content %}
+<div class="page-heading home-heading">
+  <p class="eyebrow">Національний університет «Києво-Могилянська академія»</p>
+  <h1>{{ page.title|default:'Факультет природничих наук' }}</h1>
+</div>
+<div class="home-grid">
+  <section class="prose" aria-label="Про факультет">
+    {{ page.description|linebreaks }}
+    <a class="text-link" href="{% url 'programs' %}">Переглянути спеціальності <span aria-hidden="true">↗</span></a>
+  </section>
+  <aside class="contact-panel">
+    <p class="eyebrow">Зв’язок із факультетом</p>
+    <h2>Контакти</h2>
+    <address>{{ page.contacts|linebreaks }}</address>
+  </aside>
+</div>
+{% endblock %}

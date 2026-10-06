@@ -1,0 +1,22 @@
+{% extends 'faculty/base.html' %}
+{% block title %}Спеціальності{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <p class="eyebrow">Навчання · Бакалаврат</p>
+  <h1>Спеціальності</h1>
+  <p>Знайдіть свій напрям у природничих науках.</p>
+</div>
+<div class="program-list">
+  {% for program in programs %}
+  <article class="program-row">
+    <span class="program-code">{{ program.code }}</span>
+    <div>
+      <h2><a href="{% url 'program_detail' program.pk %}">{{ program.name }}</a></h2>
+      <p>{{ program.description|truncatewords:50 }}</p>
+      <p class="meta">Координатор набору: {{ program.coordinator_name }}<br>{{ program.coordinator_contact }}</p>
+    </div>
+  </article>
+  {% empty %}<p>Спеціальності ще не додано.</p>{% endfor %}
+</div>
+<p class="note">Координатори набору та адреси example.org — навчальні дані.</p>
+{% endblock %}
