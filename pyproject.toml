@@ -1,0 +1,6 @@
+[project]
+name = "fgjjf"
+version = "0.1.0"
+description = "Лабораторна робота: сайт факультету НаУКМА"
+requires-python = ">=3.10"
+dependencies = ["Django==5.2.18"]
